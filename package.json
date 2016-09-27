@@ -1,0 +1,29 @@
+{
+  "name": "helloworld",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "DEBUG=moa2 && export NODE_ENV=development && ./node_modules/.bin/nodemon bin/www",
+    "test": "npm run l && npm start",
+    "prestart": "node bin/open_browser.js",
+    "nginx":"ps -ef|grep nginx|awk '{print $2}'|xargs sudo kill -9  | gulp nginx"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "co": "^4.6.0",
+    "debug": "^2.2.0",
+    "koa-uploadify": "^1.0.0",
+    "moa2": "^2",
+    "open": "0.0.5",
+    "qn": "^1.1.0",
+    "simditor-qn": "^1.0.2"
+  },
+  "devDependencies": {
+    "gulp-run": "^1.7.1",
+    "gulp-watch": "^4.3.9",
+    "nodemon": "^1.10.2"
+  }
+}

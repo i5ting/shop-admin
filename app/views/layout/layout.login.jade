@@ -1,0 +1,12 @@
+doctype html
+html
+  head
+    title= title
+    include ./head
+    include ./head.login.jade
+  body(style="background:white;")
+      //- include ./menu
+      div(style="")
+        //- include ./topbar
+        //- include ./footer
+        block content 

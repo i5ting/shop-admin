@@ -1,0 +1,68 @@
+nav.navbar-default.navbar-static-side(role='navigation')
+  .sidebar-collapse
+    ul#side-menu.nav.metismenu
+      li.nav-header
+        .dropdown.profile-element
+          #current-env.env-element(env='daily') StuQ商城管理
+        .logo-element StuQ
+      li
+        a(href='/')
+          i.fa.fa-th
+          span.nav-label 首页
+          span.label.label-info.pull-right soon
+      // li
+      //   a(href='#')
+      //     i.fa.fa-server
+      //     span.nav-label 功能展示
+      //     span.fa.arrow
+      //   ul.nav.nav-second-level.collapse
+      //     li
+      //       a(href='/demo/simditor') Simditor
+      //     li
+      //       a(href='/demo/uploadify') Uploadify
+            // li
+            //   a(href='/demo/bootstraptable') bootstrapTable
+      li
+        a(href='#')
+          i.fa.fa-random
+          span.nav-label 商品管理
+          span.fa.arrow
+        ul.nav.nav-second-level.collapse
+          li
+            a(href='/products/new') 添加
+          li
+            a(href='/products/') 列表
+      li
+        a(href='#')
+          i.fa.fa-file-text-o
+          span.nav-label 订单管理
+          span.fa.arrow
+        ul.nav.nav-second-level.collapse
+          li
+            a(href='/demo/jobLogger') 今日订单
+          li
+            a(href='/demo/nodeOnOfflineLog') 本月订单
+          li
+            a(href='/demo/nodeOnOfflineLog') 所有订单
+          li
+            a(href='/demo/nodeOnOfflineLog') 问题单
+      li
+        a(href='#')
+          i.fa.fa-bar-chart
+          span.nav-label 用户管理
+          span.fa.arrow
+        ul.nav.nav-second-level.collapse
+          li
+            a(href='/demo/jobtrackerMonitor') 添加
+          li
+            a(href='/demo/tasktrackerMonitor') 列表
+        li
+          a(href='#')
+            i.fa.fa-bar-chart
+            span.nav-label 系统设置
+            span.fa.arrow
+          ul.nav.nav-second-level.collapse            
+            li
+              a(href='/demo/bootstraptable') 分类设置
+            li
+              a(href='/demo/bootstraptable') 菜单设置

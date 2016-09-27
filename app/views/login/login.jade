@@ -1,0 +1,94 @@
+extends ../layout/layout.login
+
+block content
+  .col-sm-12.logo.header
+    .col-sm-2.col-xs-2#logo
+      a(href='/')
+        img(src='/images/logo.png')
+    .col-sm-10.col-xs-10
+      | 后台管理
+  .row
+    .col-sm-12.admin_login
+      |管理员登录
+  .row
+    .col-sm-3
+    .col-sm-3
+      img.left(src="/images/left.png")
+    .col-sm-3
+      form#userForm.form-horizontal(method='post', onsubmit='return true')
+        input.form-control(type='hidden', name='taskId')
+        |                         
+        .form-group                            
+          .col-sm-9
+            input.form-control.w_223#name(type='text', name='username', placeholder='用户名',required="required") 
+          .col-sm-3
+        .form-group                          
+          .col-sm-9#psw
+            input.form-control.w_223#password(type="password" name='password' placeholder="密码" required="required")                                                                        
+          .col-sm-3
+        |                                  
+        .form-group#btn
+          .col-sm-9
+            button.btn.btn-primary(type='button')
+              | 登录
+    .col-sm-3
+      button.btn.btn-warning#nametip(type='button' style="display:none;margin-left:-80px"  data-placement='right')
+        |用户名不能为空且不能少于5位
+      button.btn.btn-warning#pswtip(type='button' 
+        style="display:none;margin-left:-80px;margin-top:60px;"  data-placement='right')
+        |密码不能为空
+
+
+  script.
+      $(function() {
+        $(window).resize(function() {
+          var width =  $(window).width();
+          if(width < 1000){
+            $("#logo").css('display','none');
+          }
+          else {
+            $("#logo").css('display','block');
+          }
+        });
+
+        //按enter
+         $("body").keydown(function(event) {
+             if (event.keyCode == "13") {//keyCode=13是回车键
+                 $('#btn').click();
+             }
+         });
+        
+        //用户名文本框失去焦点触发验证事件
+        
+        $("#btn").on("click",function(){
+          var name = $("#name").val();
+          var psw = $("#password").val();
+          var data = {
+            name:name,
+            password:psw
+          }
+
+        $.post('/users/login',data,function(result){
+          if (result.success) {
+            var urls =getQueryStringByName('url');
+            if($.trim(urls) === ''){
+              window.location = "/";
+            }else{
+              window.location = getQueryStringByName('url');
+            }
+            
+          } else {
+            alert(result.msg)
+          }
+        });
+          
+          });
+          function getQueryStringByName(name){
+          var result = decodeURI(location.search).match(new RegExp("[\?\&]" + name+ "=([^\&]+)","i"));
+          if(result == null || result.length < 1){
+            return "";
+          }
+          return decodeURI(result[1]);
+          }
+      });
+

@@ -1,0 +1,106 @@
+extends ../layout/layout.product
+
+block content
+  .row.wrapper.border-bottom.white-bg.page-heading
+    .col-lg-12
+      h2 创建商品
+      |         
+      ol.breadcrumb
+        li
+          a(href='/products/') 商品管理
+        |             
+        li.active
+          b 创建商品
+  .wrapper.wrapper-content.animated.fadeInRight
+    .row
+      .col-lg-12
+        .ibox
+          .ibox-title
+            h3
+              span.text-navy 创建商品
+          |                 
+          .ibox-content
+            form#form.form-horizontal(method='post', onsubmit='return false')
+              .form-group
+                label.col-sm-2.control-label 商品名称
+                .col-sm-4
+                  input.form-control(type='text', name='product_name', placeholder='请输入商品名称【必填】')  
+              .form-group
+                label.col-sm-2.control-label 价格
+                |                             
+                .col-sm-3
+                  input.form-control(type='text', name='price', value='', placeholder='必须为数字【必填】')
+              .form-group
+                label.col-sm-2.control-label 分类
+                |                             
+                .col-sm-2
+                  select.form-control(name='category')
+                    option(value='1') 春
+                    option(value='2') 夏
+                    option(value='3') 秋
+                    option(value='4') 冬
+              |                         
+              .form-group
+                label.col-sm-2.control-label 子分类
+                |                             
+                .col-sm-3
+                  select.form-control(name='type')
+                    option(value='1') 0~1年                 
+                    option(value='2', selected='') 1~5年
+                    option(value='3') 5~10年
+                    option(value='4') 10年+
+          
+              .form-group.full-height-scroll
+                textare(id="editor" placeholder="图文详情" autofocus)
+              .form-group
+                .col-sm-1.col-sm-offset-3(style='width:70px;')
+                  button(id="submit" type="submit" class="btn btn-primary") Submit
+                .col-sm-1.col-sm-offset-3(style='width:70px;')
+                  button#editBtn.btn.btn-danger(type='button') Cancel
+
+    <!-- |
+    .row
+      .col-lg-12
+        .ibox
+          #ltstableContainer.ibox-content -->
+  
+  script.
+    $(document).ready(function () {
+    
+      $('#submit').on('click', function () {
+        var data = {
+          detail : $('#editor').val(),
+          is_index: false,
+          recommend: false,
+          is_top_slide: false
+        }
+        
+        if ($('input[name=price]').val() != '') {
+          data['price'] = $('input[name=price]').val()
+        }
+        
+        if ($('input[name=product_name]').val() != '') {
+          data['name'] = $('input[name=product_name]').val()
+        }
+        
+        if ($('select[name=category]').val() != '') {
+          data['category'] = $('select[name=category]').val()
+        }
+
+        if ($('select[name=type]').val() != '') {
+          data['type'] = $('select[name=type]').val()
+        }
+        
+        console.dir(data);
+        
+        $.post('/api/products/', data, function(data){
+           window.location.href = '/products/'
+        })
+        
+      });
+    });
+  
+
+    
+  script.
+    window.qn_token = "#{token}"
