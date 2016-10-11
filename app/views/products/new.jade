@@ -93,10 +93,13 @@ block content
         
         console.dir(data);
         
-        $.post('/api/products/', data, function(data){
-           window.location.href = '/products/'
-        })
-        
+        if (data['name'] && data['price']) {
+          $.post('/api/products/', data, function(data){
+             window.location.href = '/products/'
+          })
+        } else {
+          alert('请添加名称和价格')
+        }
       });
     });
   
@@ -104,3 +107,4 @@ block content
     
   script.
     window.qn_token = "#{token}"
+    alert(window.qn_token)

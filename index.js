@@ -9,6 +9,15 @@ debug($controllers)
 debug($models)
 
 
+// config
+var simditor_qn_config = require('./config/simditor_qn')
+
+var mount_simditor_qn = require('koa-simditor-qn');
+
+// mount 
+mount_simditor_qn(app, simditor_qn_config);
+
+// mount_uploadify
 var mount_uploadify = require('koa-uploadify')
 
 mount_uploadify (app, {
