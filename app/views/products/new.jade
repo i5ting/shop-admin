@@ -49,7 +49,8 @@ block content
                     option(value='2', selected='') 1~5年
                     option(value='3') 5~10年
                     option(value='4') 10年+
-          
+              .form-group.full-height-scroll
+                #fileuploader Upload
               .form-group.full-height-scroll
                 textare(id="editor" placeholder="图文详情" autofocus)
               .form-group
@@ -66,7 +67,45 @@ block content
   
   script.
     $(document).ready(function () {
-    
+      var _i = 0;
+    	$("#fileuploader").uploadFile({
+    		url:"/fileupload/",
+    		fileName:"myfile",
+        multiple:true,
+        dragDrop:true,
+        showDownload:false,
+        showDelete: true,
+        onSuccess: function (files, response, xhr, pd) {
+          console.log(JSON.stringify(files));
+          _img = response[0].hash;
+          
+          $('.ajax-file-upload-preview' + _i).attr('src', 'http://img.mengxiaoban.cn/'+_img).show()
+        },
+        showFileCounter:false,
+    	  customProgressBar: function(obj,s)
+    		{
+          _i++
+    			this.statusbar = $("<div class='ajax-file-upload-statusbar'></div>");
+                this.preview = $("<img class='ajax-file-upload-preview"+_i+"' />").width(s.previewWidth).height(s.previewHeight).appendTo(this.statusbar).hide();
+                this.filename = $("<div class='ajax-file-upload-filename'></div>").appendTo(this.statusbar);
+                this.progressDiv = $("<div class='ajax-file-upload-progress'>").appendTo(this.statusbar).hide();
+                this.progressbar = $("<div class='ajax-file-upload-bar'></div>").appendTo(this.progressDiv);
+                this.abort = $("<div>" + s.abortStr + "</div>").appendTo(this.statusbar).hide();
+                this.cancel = $("<div>" + s.cancelStr + "</div>").appendTo(this.statusbar).hide();
+                this.done = $("<div>" + s.doneStr + "</div>").appendTo(this.statusbar).hide();
+                this.download = $("<div>" + s.downloadStr + "</div>").appendTo(this.statusbar).hide();
+                this.del = $("<div>" + s.deletelStr + "</div>").appendTo(this.statusbar).hide();
+            
+                this.abort.addClass("custom-red");
+                this.done.addClass("custom-green");
+    			this.download.addClass("custom-green");            
+                this.cancel.addClass("custom-red");
+                this.del.addClass("custom-red");
+
+    			return this;
+			
+    		}
+    	});
       $('#submit').on('click', function () {
         var data = {
           detail : $('#editor').val(),
@@ -102,9 +141,5 @@ block content
         }
       });
     });
-  
-
-    
   script.
     window.qn_token = "#{token}"
-    alert(window.qn_token)

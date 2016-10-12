@@ -24,8 +24,8 @@ mount_uploadify (app, {
   debug:true,
   path:'/fileupload',
   fileKey:'myfile',
-  multer:{ dest: 'uploads/' }
-  
+  multer:{ dest: 'uploads/' },
+  qn: simditor_qn_config.qn
 });
 
 
