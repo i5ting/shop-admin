@@ -112,6 +112,10 @@ block content
           '|',
           '<a class="action_recommend" href="javascript:void(0)" title="Edit">',
           '推荐',
+          '</a>',
+          '|',
+          '<a class="action_preview" href="javascript:void(0)" title="Edit">',
+          '预览',
           '</a>'].join('');
       }
 
@@ -160,11 +164,17 @@ block content
           $.post('/api/products/set_recommend/' + row._id + '/' + i ,{}, function(data){
             $("#tableid").bootstrapTable('refresh');
           })
+        },
+        
+        'click .action_preview' : function(e, value, row, index){
+          console.log(row)
+          var i = row.recommend == false ? 0 : 1
+          console.log('/api/products/set_recommend/' + row._id + '/' + i);
+          
+          window.location.href = '/products/preview/' +  row._id 
         }
-        
-        
-        
       }
+      
       //开始时间
       function getFormatTime (value, row, index) {
         var time = moment(row.data).format('YYYY-MM-DD HH:mm');

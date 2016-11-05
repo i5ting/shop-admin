@@ -141,7 +141,12 @@ block content
           }
         })
         
-        console.dir(slider_images);
+        if (slider_images.length > 0) {
+          data['slides'] = slider_images  
+        } else {
+          alert('头图至少一张')
+          return
+        }
         
         if (data['name'] && data['price']) {
           $.post('/api/products/', data, function(data){
