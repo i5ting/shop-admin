@@ -132,6 +132,17 @@ block content
         
         console.dir(data);
         
+        var slider_images = []
+        
+        $('.ajax-file-upload-container img').each(function(idx){
+          var img = $('.ajax-file-upload-container img')[idx]
+          if (img && img.src) {
+            slider_images.push(img.src)
+          }
+        })
+        
+        console.dir(slider_images);
+        
         if (data['name'] && data['price']) {
           $.post('/api/products/', data, function(data){
              window.location.href = '/products/'
