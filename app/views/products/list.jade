@@ -171,7 +171,7 @@ block content
           var i = row.recommend == false ? 0 : 1
           console.log('/api/products/set_recommend/' + row._id + '/' + i);
           
-          window.location.href = '/products/preview/' +  row._id 
+          window.location.href = '/h5/preview?id=' +  row._id 
         }
       }
       
