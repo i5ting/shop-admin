@@ -180,4 +180,12 @@ block content
         var time = moment(row.data).format('YYYY-MM-DD HH:mm');
         return time
       }
+      
+      function getQueryStringByName(name){
+        var result = decodeURI(location.search).match(new RegExp("[\?\&]" + name+ "=([^\&]+)","i"));
+        if(result == null || result.length < 1){
+          return "";
+        }
+        return decodeURI(result[1]);
+      }
     
